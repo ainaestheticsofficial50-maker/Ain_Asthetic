@@ -1,0 +1,35 @@
+<%
+  const nav = [
+    ['/', 'Home'],
+    ['/treatments', 'Treatments'],
+    ['/doctors', 'Doctors'],
+    ['/results', 'Results'],
+    ['/offers', 'Offers'],
+    ['/contact', 'Contact'],
+  ];
+  const isCurrent = (href) => href === '/' ? path === '/' : path.startsWith(href);
+%>
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="<%= site.name %> home">
+      <img src="/img/logo-mark.png" alt="" width="59" height="39">
+      <span class="brand-text">
+        <span class="brand-name">Aesthetics &amp;</span>
+        <span class="brand-sub">Medical Center</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span></span><span></span><span></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" data-nav>
+      <ul>
+        <% nav.forEach(([href, label]) => { %>
+          <li><a href="<%= href %>" <%- isCurrent(href) ? 'aria-current="page"' : '' %>><%= label %><% if (href === '/offers' && site.activeOffers.length) { %><span class="nav-dot" aria-label="<%= site.activeOffers.length %> active offers"></span><% } %></a></li>
+        <% }) %>
+      </ul>
+      <a class="btn btn-primary btn-sm" href="/contact">Book Appointment</a>
+      <p class="nav-extra">Or call <a href="tel:<%= site.phones[0].replace(/-/g, '') %>"><%= site.phones[0] %></a></p>
+    </nav>
+  </div>
+</header>

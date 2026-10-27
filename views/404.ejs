@@ -1,0 +1,17 @@
+<%- include('partials/head') %>
+
+<section class="page-hero page-hero-tall">
+  <div class="container">
+    <% if (locals.error) { %>
+      <h1>Something went wrong</h1>
+      <p class="lead">Please try again, or call us on <a href="tel:<%= site.phones[0].replace(/-/g, '') %>"><%= site.phones[0] %></a>.</p>
+    <% } else { %>
+      <p class="script">Oops</p>
+      <h1>Page not found</h1>
+      <p class="lead">The page you’re looking for doesn’t exist.</p>
+    <% } %>
+    <a class="btn btn-primary" href="/">Back to home</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

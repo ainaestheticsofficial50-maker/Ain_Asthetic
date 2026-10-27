@@ -1,0 +1,30 @@
+<%- include('partials/head') %>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Limited time</p>
+    <h1>Current Offers</h1>
+    <p class="lead">Save on our most popular treatments. Offers are for a limited time, so book or message us to reserve your slot.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <% if (site.activeOffers.length) { %>
+      <div class="offer-list" data-gallery>
+        <% site.activeOffers.forEach(o => { %><%- include('partials/offer-card', { o }) %><% }) %>
+      </div>
+      <p class="disclaimer">Offers are valid for a limited time and may change without notice. Final treatment plan is confirmed at consultation.</p>
+    <% } else { %>
+      <div class="help-box">
+        <div>
+          <h2>No offers running right now</h2>
+          <p>Follow us on Instagram <a href="https://www.instagram.com/<%= site.instagram %>" target="_blank" rel="noopener">@<%= site.instagram %></a> to hear about the next one.</p>
+        </div>
+        <div class="help-actions"><a class="btn btn-primary" href="/treatments">Browse treatments</a></div>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

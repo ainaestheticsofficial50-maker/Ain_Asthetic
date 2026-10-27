@@ -1,0 +1,61 @@
+<%- include('partials/head') %>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Our team</p>
+    <h1>Meet Our Doctors</h1>
+    <p class="lead">Dermatologists and aesthetic physicians with decades of combined experience, caring for your skin and hair with honesty and expertise.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container doc-list">
+    <% site.doctors.forEach(d => { %>
+      <%- include('partials/doctor-card', { d, full: true }) %>
+    <% }) %>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="container split">
+    <div class="split-media reveal">
+      <img src="/img/consent.jpg" alt="A patient reviewing her consent form" loading="lazy">
+    </div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">How we work</p>
+      <h2>Consent before every procedure</h2>
+      <p>Before any treatment, your doctor explains what will be done, what to expect and how to care for your skin afterwards. You sign only when you’re comfortable.</p>
+      <ul class="checklist">
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> Consultation and skin assessment first</li>
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> Clear treatment plan and expectations</li>
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> Written consent before the procedure</li>
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> Aftercare guidance and follow-up</li>
+      </ul>
+      <a class="btn btn-primary" href="/contact">Book a consultation</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">From our clinic</p>
+      <h2>Life at Ain Aesthetics</h2>
+      <p>Tap any image to view it full size.</p>
+    </header>
+    <div class="poster-cards" data-gallery>
+      <% site.clinicPosters.forEach(p => { %>
+        <a class="poster-card reveal" href="/img/posters/<%= p.file %>" data-lightbox>
+          <span class="poster-card-media">
+            <img class="poster-card-bg" src="/img/posters/<%= p.file %>" alt="" aria-hidden="true" loading="lazy">
+            <img class="poster-card-img" src="/img/posters/<%= p.file %>" alt="<%= p.title %>" loading="lazy">
+            <span class="poster-card-zoom" aria-hidden="true">View full size</span>
+          </span>
+          <span class="poster-card-title"><%= p.title %></span>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

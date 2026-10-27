@@ -1,0 +1,95 @@
+<%
+  const form = locals.form || {};
+  const preselect = form.service || (locals.query && locals.query.service) || '';
+%>
+<%- include('partials/head') %>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">We’d love to see you</p>
+    <h1>Book Your Appointment</h1>
+    <p class="lead">Send a request below and our team will call you to confirm a time, or reach us directly on phone or WhatsApp.</p>
+    <ol class="steps">
+      <li><span>1</span> Send your request</li>
+      <li><span>2</span> We call to confirm a time</li>
+      <li><span>3</span> Consultation with a doctor</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-card reveal">
+      <% if (locals.status === 'sent') { %>
+        <div class="alert alert-success" role="status">
+          <strong>Thank you!</strong> Your request has been received. We’ll call you shortly to confirm.
+        </div>
+      <% } %>
+      <% if (locals.errors) { %>
+        <div class="alert alert-error" role="alert">
+          <% errors.forEach(e => { %><p><%= e %></p><% }) %>
+        </div>
+      <% } %>
+
+      <form method="post" action="/contact" class="form" novalidate>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" required autocomplete="name" value="<%= form.name || '' %>">
+        </div>
+        <div class="field">
+          <label for="phone">Phone / WhatsApp</label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="03XX-XXXXXXX" value="<%= form.phone || '' %>">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="service">Treatment</label>
+            <select id="service" name="service" data-preselect="<%= preselect %>">
+              <option value="">Not sure / Consultation</option>
+              <% site.categories.forEach(c => { %>
+                <optgroup label="<%= c.title %>">
+                  <% site.treatments.filter(t => t.category === c.slug).forEach(t => { const o = site.offerById[t.offer]; %>
+                    <option value="<%= t.title %>" <%= preselect === t.title ? 'selected' : '' %>><%= t.title %><%= o ? ` (${o.badge})` : '' %></option>
+                  <% }) %>
+                </optgroup>
+              <% }) %>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Preferred date</label>
+            <input id="date" name="date" type="date" value="<%= form.date || '' %>">
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Message <span class="muted">(optional)</span></label>
+          <textarea id="message" name="message" rows="4"><%= form.message || '' %></textarea>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="website">Leave empty</label>
+          <input id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <button class="btn btn-primary" type="submit" data-submit>Request Appointment</button>
+      </form>
+    </div>
+
+    <aside class="contact-info reveal">
+      <div class="info-block">
+        <h2>Call us</h2>
+        <% site.phones.forEach(p => { %>
+          <a class="big-phone" href="tel:<%= p.replace(/-/g, '') %>"><%= p %></a>
+        <% }) %>
+        <a class="btn btn-whatsapp" href="<%= site.waLink('Hi, I would like to book an appointment.') %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 20 }) %> Chat on WhatsApp</a>
+      </div>
+      <div class="info-block">
+        <h2>Our location</h2>
+        <address><%- site.address.lines.join('<br>') %></address>
+        <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=<%= encodeURIComponent(site.address.mapQuery) %>" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+      <div class="map">
+        <iframe title="Map to <%= site.name %>" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=<%= encodeURIComponent(site.address.mapQuery) %>&output=embed"></iframe>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

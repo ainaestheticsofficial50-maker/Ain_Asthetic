@@ -1,0 +1,109 @@
+<%- include('partials/head') %>
+<% const t = treatment; const bookHref = `/contact?service=${encodeURIComponent(t.title)}`; %>
+
+<nav class="crumbs container" aria-label="Breadcrumb">
+  <a href="/treatments">Treatments</a> <span aria-hidden="true">/</span>
+  <% if (category.title !== t.title) { %><a href="/treatments#<%= category.slug %>"><%= category.title %></a> <span aria-hidden="true">/</span><% } %>
+  <span aria-current="page"><%= t.title %></span>
+</nav>
+
+<section class="t-hero">
+  <div class="container t-hero-grid">
+    <div class="t-hero-copy">
+      <p class="eyebrow"><%= category.title %></p>
+      <h1><%= t.title %></h1>
+      <% if (offer) { %>
+        <a class="offer-banner" href="/offers"><span class="badge badge-offer"><%= offer.badge %></span> <%= offer.text %></a>
+      <% } %>
+      <p class="lead"><%= t.summary %></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="<%= bookHref %>">Book <%= t.title %></a>
+        <a class="btn btn-ghost" href="<%= site.waLink(`Hi, I'd like to book ${t.title}. Could you share the details?`) %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 18 }) %> Ask on WhatsApp</a>
+      </div>
+
+      <div class="t-facts">
+        <div>
+          <h2>Benefits</h2>
+          <ul class="checklist">
+            <% t.benefits.forEach(b => { %><li><%- include('partials/icon', { name: 'check', size: 20 }) %> <%= b %></li><% }) %>
+          </ul>
+        </div>
+        <div>
+          <h2>Best for</h2>
+          <ul class="tag-list">
+            <% t.bestFor.forEach(b => { %><li><%= b %></li><% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="t-hero-media" data-gallery>
+      <a class="poster" href="/img/<%= t.poster %>" data-lightbox>
+        <img src="/img/<%= t.poster %>" alt="<%= t.title %> at <%= site.name %>">
+      </a>
+    </div>
+  </div>
+</section>
+
+<% if (results.length) { %>
+<section class="section section-tint">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Real results</p>
+      <h2><%= t.title %>: before &amp; after</h2>
+    </header>
+    <div class="compare-grid snap-row stagger" data-snap>
+      <% results.forEach(item => { %><%- include('partials/compare', { item }) %><% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<% if (t.photo) { %>
+<section class="section">
+  <div class="container split">
+    <div class="split-media reveal"><img src="/img/<%= t.photo %>" alt="<%= t.title %> being performed at the clinic" loading="lazy"></div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">At our clinic</p>
+      <h2>Performed by our doctors</h2>
+      <p>Your <%= t.title %> treatment is carried out by our medical team in a clean, calm clinical setting, with consent and aftercare explained at every step.</p>
+      <a class="btn btn-primary" href="<%= bookHref %>">Book now</a>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<% if (compare) { %>
+<section class="section">
+  <div class="container">
+    <div class="compare-box reveal">
+      <h2><%= t.title %> or <%= compare.title %>? <span>Which is right for you?</span></h2>
+      <div class="compare-box-grid">
+        <% [t, compare].forEach(x => { %>
+          <div>
+            <h3><%= x.title %></h3>
+            <p>Best for <%= x.bestFor.join(', ').toLowerCase() %>.</p>
+            <% if (x !== t) { %><a class="link-arrow" href="/treatments/<%= x.slug %>">View <%= x.title %></a><% } %>
+          </div>
+        <% }) %>
+      </div>
+      <p class="muted">Still unsure? Our doctors will recommend the right option at your consultation.</p>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<% if (related.length) { %>
+<section class="section <%= results.length ? '' : 'section-tint' %>">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">More in <%= category.title %></p>
+      <h2>Related treatments</h2>
+    </header>
+    <div class="t-grid stagger">
+      <% related.slice(0, 3).forEach(r => { %><%- include('partials/treatment-card', { t: r }) %><% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,16 @@
+<article class="doc-card reveal" id="<%= d.slug %>">
+  <div class="doc-photo">
+    <img src="/img/<%= d.photo %>" alt="<%= d.name %>" loading="lazy">
+    <span class="doc-exp"><strong><%= d.experience %></strong> years<br>experience</span>
+  </div>
+  <div class="doc-body">
+    <h3><%= d.name %></h3>
+    <p class="doc-role"><%= d.role %></p>
+    <% if (locals.full) { %>
+      <p><%= d.bio %></p>
+      <ul class="tag-list">
+        <% d.focus.forEach(f => { %><li><%= f %></li><% }) %>
+      </ul>
+    <% } %>
+  </div>
+</article>

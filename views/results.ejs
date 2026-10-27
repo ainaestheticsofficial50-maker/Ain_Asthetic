@@ -1,0 +1,68 @@
+<%- include('partials/head') %>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Real people · Real results</p>
+    <h1>Before &amp; After</h1>
+    <p class="lead">Results from treatments performed at <%= site.name %>. Drag each slider to compare.</p>
+  </div>
+</section>
+
+<nav class="chip-nav" aria-label="Filter results" data-filter>
+  <div class="container chip-nav-inner">
+    <button class="chip is-active" type="button" data-filter-value="all" aria-pressed="true">All</button>
+    <% [...new Set(site.results.map(r => r.treatment))].forEach(slug => { %>
+      <button class="chip" type="button" data-filter-value="<%= slug %>" aria-pressed="false"><%= site.treatmentBySlug[slug].title %></button>
+    <% }) %>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+    <div class="compare-grid stagger">
+      <% site.results.forEach(item => { %>
+        <div class="filter-item" data-filter-key="<%= item.treatment %>">
+          <%- include('partials/compare', { item }) %>
+          <a class="link-arrow result-link" href="/treatments/<%= item.treatment %>">About <%= site.treatmentBySlug[item.treatment].title %></a>
+        </div>
+      <% }) %>
+    </div>
+    <p class="disclaimer">Photos shared with patient consent. Individual results may vary depending on skin type, condition and number of sessions.</p>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Case highlights</p>
+      <h2>Full results</h2>
+      <p>Tap any poster to view it full size.</p>
+    </header>
+    <div class="poster-cards" data-gallery>
+      <% site.resultPosters.forEach(p => { %>
+        <a class="poster-card reveal" href="/img/posters/<%= p.file %>" data-lightbox>
+          <span class="poster-card-media">
+            <img class="poster-card-bg" src="/img/posters/<%= p.file %>" alt="" aria-hidden="true" loading="lazy">
+            <img class="poster-card-img" src="/img/posters/<%= p.file %>" alt="<%= p.title %>" loading="lazy">
+            <span class="poster-card-zoom" aria-hidden="true">View full size</span>
+          </span>
+          <span class="poster-card-title"><%= p.title %></span>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Client reviews</p>
+      <h2>What our clients say</h2>
+    </header>
+    <div class="review-grid snap-row stagger" data-snap>
+      <% site.reviews.forEach(r => { %><%- include('partials/review-card', { r }) %><% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

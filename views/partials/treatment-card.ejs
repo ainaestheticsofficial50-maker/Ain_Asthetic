@@ -1,0 +1,13 @@
+<% const o = site.offerById[t.offer]; %>
+<a class="t-card reveal" href="/treatments/<%= t.slug %>">
+  <span class="t-card-media">
+    <img src="/img/<%= t.poster %>" alt="" loading="lazy">
+    <% if (o) { %><span class="badge badge-offer"><%= o.badge %></span><% } %>
+  </span>
+  <span class="t-card-body">
+    <span class="t-card-cat"><%= site.categoryBySlug[t.category].title %></span>
+    <h3><%= t.title %></h3>
+    <span class="t-card-text"><%= t.summary %></span>
+    <span class="link-arrow">View treatment</span>
+  </span>
+</a>

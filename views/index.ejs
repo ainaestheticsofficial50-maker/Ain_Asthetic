@@ -1,0 +1,154 @@
+<%- include('partials/head') %>
+<% const lead = site.leadDoctor; %>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><%= site.tagline %></p>
+      <h1>Expert skin, hair &amp; laser care, <span class="accent">led by doctors</span></h1>
+      <p class="lead">Dermatologists and aesthetic physicians at <%= site.name %>, <%= site.address.short %>. Honest advice, safe treatments, real results.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/contact">Book Appointment</a>
+        <a class="btn btn-ghost" href="/treatments">Explore treatments</a>
+      </div>
+      <ul class="hero-stats">
+        <li><strong><%= Math.max(...site.doctors.map(d => d.experience)) %> yrs</strong><span>Senior dermatologist experience</span></li>
+        <li><strong><%= site.doctors.length %> doctors</strong><span>Dermatology &amp; aesthetics</span></li>
+        <li><strong><%= site.treatments.length %>+</strong><span>Skin, hair &amp; laser treatments</span></li>
+      </ul>
+    </div>
+    <div class="hero-media">
+      <div class="hero-arch">
+        <img src="/img/dr-asim-hero.jpg" alt="<%= lead.name %> at Ain Aesthetics" width="560" height="1030" fetchpriority="high">
+      </div>
+      <div class="hero-badge">
+        <p class="script">Meet</p>
+        <p class="hero-badge-name"><%= lead.name %></p>
+        <p class="hero-badge-role"><%= lead.role %></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if (site.activeOffers.length) { %>
+<section class="offer-strip" aria-label="Current offers">
+  <div class="container offer-strip-inner">
+    <span class="offer-strip-label">Limited-time offers</span>
+    <div class="offer-chips">
+      <% site.activeOffers.forEach(o => { %>
+        <a class="offer-chip" href="/treatments/<%= o.treatment %>"><strong><%= o.badge %></strong> <%= o.title %></a>
+      <% }) %>
+    </div>
+    <a class="link-arrow offer-strip-all" href="/offers">All offers</a>
+  </div>
+</section>
+<% } %>
+
+<section class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">What would you like to treat?</p>
+      <h2>Find the right treatment</h2>
+      <p>Choose a concern to see the treatments for it. Not sure? Book a consultation and we’ll guide you.</p>
+    </header>
+    <div class="cat-grid stagger">
+      <% site.categories.forEach(c => { const items = site.treatments.filter(t => t.category === c.slug); %>
+        <div class="cat-card reveal">
+          <a class="cat-card-head" href="/treatments#<%= c.slug %>">
+            <span class="icon-ring"><%- include('partials/icon', { name: c.icon }) %></span>
+            <span>
+              <h3><%= c.title %></h3>
+              <span class="cat-blurb"><%= c.blurb %></span>
+            </span>
+          </a>
+          <ul class="cat-links">
+            <% items.forEach(t => { %>
+              <li><a href="/treatments/<%= t.slug %>"><%= t.title %><% if (site.offerById[t.offer]) { %> <span class="badge badge-offer badge-sm"><%= site.offerById[t.offer].badge %></span><% } %></a></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Real people, real results</p>
+      <h2>Before &amp; after</h2>
+      <p>Drag the slider to compare. Photos shared with patient consent.</p>
+    </header>
+    <div class="compare-grid snap-row stagger" data-snap>
+      <% site.results.slice(0, 3).forEach(item => { %>
+        <%- include('partials/compare', { item }) %>
+      <% }) %>
+    </div>
+    <p class="center"><a class="btn btn-ghost" href="/results">See all results</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Our doctors</p>
+      <h2>Experienced hands you can trust</h2>
+      <p>Every treatment is planned by a qualified doctor, from dermatology to advanced aesthetics.</p>
+    </header>
+    <div class="doc-grid snap-row stagger" data-snap>
+      <% site.doctors.forEach(d => { %>
+        <%- include('partials/doctor-card', { d }) %>
+      <% }) %>
+    </div>
+    <p class="center"><a class="btn btn-ghost" href="/doctors">Meet the team</a></p>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="container split">
+    <div class="split-media reveal">
+      <img src="/img/consent.jpg" alt="A patient reviewing her consent form at the front desk" loading="lazy">
+    </div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">Why patients choose us</p>
+      <h2>Safe, honest, personal care</h2>
+      <ul class="checklist">
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> <span><strong>Doctor-led.</strong> Dermatologists and aesthetic physicians plan every treatment.</span></li>
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> <span><strong>Consent before every procedure.</strong> You know exactly what’s being done and why.</span></li>
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> <span><strong>Honest advice.</strong> We only recommend what will work for you.</span></li>
+        <li><%- include('partials/icon', { name: 'check', size: 20 }) %> <span><strong>Follow-up care</strong> after every session.</span></li>
+      </ul>
+      <a class="btn btn-primary" href="/contact">Book a consultation</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Client reviews</p>
+      <h2>Your trust inspires us</h2>
+    </header>
+    <div class="review-grid snap-row stagger" data-snap>
+      <% site.reviews.forEach(r => { %>
+        <%- include('partials/review-card', { r }) %>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy">
+  <div class="container">
+    <header class="section-head section-head-light">
+      <p class="eyebrow">Inside the clinic</p>
+      <h2>See us at work</h2>
+    </header>
+    <div class="video-grid snap-row stagger" data-snap>
+      <% site.videos.forEach(file => { %>
+        <video class="reveal" src="/video/<%= file %>" autoplay muted loop playsinline preload="metadata" data-autoplay></video>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

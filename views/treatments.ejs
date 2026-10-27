@@ -1,0 +1,53 @@
+<%- include('partials/head') %>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow"><%= site.tagline %></p>
+    <h1>Treatments</h1>
+    <p class="lead">Doctor-led skin, anti-ageing, hair and laser treatments. Pick a category below, or book a consultation if you’re not sure where to start.</p>
+  </div>
+</section>
+
+<nav class="chip-nav" aria-label="Treatment categories" data-chipnav>
+  <div class="container chip-nav-inner">
+    <% site.categories.forEach(c => { %>
+      <a class="chip" href="#<%= c.slug %>"><%= c.title %></a>
+    <% }) %>
+    <% if (site.activeOffers.length) { %><a class="chip chip-accent" href="/offers">Offers</a><% } %>
+  </div>
+</nav>
+
+<% site.categories.forEach((c, i) => { const items = site.treatments.filter(t => t.category === c.slug); %>
+<section class="section <%= i % 2 ? 'section-tint' : '' %> cat-section" id="<%= c.slug %>">
+  <div class="container">
+    <header class="cat-section-head">
+      <span class="icon-ring"><%- include('partials/icon', { name: c.icon }) %></span>
+      <div>
+        <h2><%= c.title %></h2>
+        <p><%= c.blurb %></p>
+      </div>
+    </header>
+    <div class="t-grid stagger">
+      <% items.forEach(t => { %><%- include('partials/treatment-card', { t }) %><% }) %>
+    </div>
+  </div>
+</section>
+<% }) %>
+
+<section class="section">
+  <div class="container">
+    <div class="help-box reveal">
+      <div>
+        <p class="script">Not sure?</p>
+        <h2>Start with a consultation</h2>
+        <p>Our doctors will assess your skin or hair and recommend the treatment that fits your goals, with no pressure.</p>
+      </div>
+      <div class="help-actions">
+        <a class="btn btn-primary" href="/contact">Book a consultation</a>
+        <a class="btn btn-ghost" href="<%= site.waLink('Hi, I need advice on which treatment is right for me.') %>" target="_blank" rel="noopener">Ask on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

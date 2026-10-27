@@ -1,0 +1,16 @@
+<figure class="compare-card reveal">
+  <div class="compare" data-compare>
+    <img src="/img/results/<%= item.after %>" alt="<%= item.title %>: after treatment" loading="lazy">
+    <div class="compare-before">
+      <img src="/img/results/<%= item.before %>" alt="<%= item.title %>: before treatment" loading="lazy">
+    </div>
+    <span class="compare-label compare-label-before">Before</span>
+    <span class="compare-label compare-label-after">After</span>
+    <span class="compare-handle" aria-hidden="true"></span>
+    <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after: <%= item.title %>">
+  </div>
+  <figcaption>
+    <strong><%= item.title %></strong>
+    <span><%= item.note %></span>
+  </figcaption>
+</figure>
