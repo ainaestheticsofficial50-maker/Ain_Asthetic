@@ -5,7 +5,10 @@ module.exports = {
   name: 'Ain Aesthetics & Medical Center',
   shortName: 'Ain Aesthetics',
   tagline: 'Skin · Hair · Wellness',
-  url: process.env.SITE_URL || 'http://localhost:3000',
+  // SITE_URL wins (set it once a custom domain is live); on Vercel fall back to the production domain.
+  url: process.env.SITE_URL
+    || (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`)
+    || 'http://localhost:3000',
 
   phones: ['0310-6563444', '0322-6294982'],
   whatsapp: '923106563444',

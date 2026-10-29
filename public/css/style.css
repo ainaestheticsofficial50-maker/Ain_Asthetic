@@ -6,11 +6,12 @@
   --rose: #c07a5f;
   --rose-dark: #a5604a;
   --rose-light: #e7b9a4;
+  --rose-text: #965540; /* rose for small text: 4.5:1 on cream */
   --gold: #b8955a;
   --cream: #f8f3ec;
   --cream-2: #f1e8dd;
   --ink: #26303f;
-  --muted: #6b7280;
+  --muted: #5b6270;
   --line: #e6dccf;
 
   --serif: 'Playfair Display', Georgia, serif;
@@ -75,7 +76,7 @@ address { font-style: normal; }
 
 .eyebrow {
   font-size: .78rem; letter-spacing: .28em; text-transform: uppercase;
-  color: var(--rose); font-weight: 500; margin-bottom: .8rem;
+  color: var(--rose-text); font-weight: 500; margin-bottom: .8rem;
 }
 .script { font-family: var(--script); color: var(--rose); font-size: clamp(2.1rem, 4vw, 2.6rem); line-height: 1; margin: 0 0 .1em; }
 .lead { font-size: clamp(1.02rem, 1.2vw, 1.15rem); color: #4b5563; max-width: 40rem; }
@@ -94,18 +95,18 @@ address { font-style: normal; }
 }
 .btn:active { transform: scale(.97); }
 .btn-sm { min-height: 42px; padding: .65rem 1.3rem; font-size: .88rem; }
-.btn-primary { background: var(--rose); color: #fff; box-shadow: 0 10px 24px -12px var(--rose); }
+.btn-primary { background: var(--rose-dark); color: #fff; box-shadow: 0 10px 24px -12px var(--rose); }
 .btn-ghost { border-color: var(--navy); color: var(--navy); }
 .btn-light { background: #fff; color: var(--navy); }
 .btn-outline-light { border-color: rgba(255,255,255,.6); color: #fff; }
 .btn-whatsapp { background: #25d366; color: #fff; margin-top: 1rem; }
 .btn[disabled] { opacity: .7; cursor: progress; }
-.link-arrow { color: var(--rose); font-weight: 500; text-decoration: none; letter-spacing: .03em; }
+.link-arrow { color: var(--rose-text); font-weight: 500; text-decoration: none; letter-spacing: .03em; }
 .link-arrow::after { content: ' →'; display: inline-block; transition: transform .25s var(--ease); }
 
 @media (hover: hover) {
   .btn:hover { transform: translateY(-2px); }
-  .btn-primary:hover { background: var(--rose-dark); box-shadow: 0 14px 28px -12px var(--rose); }
+  .btn-primary:hover { background: #8f4f3b; box-shadow: 0 14px 28px -12px var(--rose); }
   .btn-ghost:hover { background: var(--navy); color: #fff; }
   .btn-outline-light:hover { background: rgba(255,255,255,.12); }
   .link-arrow:hover::after { transform: translateX(4px); }
@@ -127,7 +128,7 @@ address { font-style: normal; }
 .brand img { width: 59px; height: auto; }
 /* Mirrors the logo lockup: rose "Aesthetics &" over a navy "Medical Center" badge */
 .brand-text { display: flex; flex-direction: column; align-items: center; gap: 3px; line-height: 1.1; }
-.brand-name { font-family: var(--serif); font-size: 1.2rem; color: var(--rose); font-weight: 700; letter-spacing: .01em; }
+.brand-name { font-family: var(--serif); font-size: 1.2rem; color: var(--rose-text); font-weight: 700; letter-spacing: .01em; }
 .brand-sub {
   font-family: var(--serif); font-size: .74rem; font-weight: 600; color: #fff;
   background: var(--navy); border-radius: 4px; padding: 2px 7px;
@@ -503,7 +504,7 @@ html.header-hidden .chip-nav { top: 0; }
 }
 .chip:hover { border-color: var(--rose); }
 .chip.is-active { background: var(--navy); border-color: var(--navy); color: #fff; }
-.chip-accent { background: var(--rose); border-color: var(--rose); color: #fff; }
+.chip-accent { background: var(--rose-dark); border-color: var(--rose-dark); color: #fff; }
 
 /* ---------- Offer strip (home) ---------- */
 .offer-strip { background: var(--navy); color: #fff; }
@@ -553,7 +554,7 @@ html.header-hidden .chip-nav { top: 0; }
 .t-card-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transition: transform .6s var(--ease); }
 .t-card-media .badge { position: absolute; top: 1rem; left: 1rem; box-shadow: 0 6px 16px -6px rgba(0,0,0,.4); }
 .t-card-body { display: flex; flex-direction: column; flex: 1; gap: .3rem; padding: 1.3rem 1.4rem 1.5rem; }
-.t-card-cat { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--rose); }
+.t-card-cat { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--rose-text); }
 .t-card h3 { margin: 0; }
 .t-card-text { color: var(--muted); font-size: .95rem; line-height: 1.55; flex: 1; margin-bottom: .6rem; }
 @media (hover: hover) {
@@ -622,7 +623,7 @@ html.header-hidden .chip-nav { top: 0; }
 .doc-exp strong { font-family: var(--serif); font-size: 1.4rem; color: var(--rose-light); margin-right: .2rem; }
 .doc-body { padding: 1.2rem 1.4rem 1.4rem; }
 .doc-body h3 { margin: 0 0 .1rem; }
-.doc-role { margin: 0; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--rose); }
+.doc-role { margin: 0; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--rose-text); }
 .doc-body p:not(.doc-role):not(.doc-position) { margin: 1rem 0; color: #4b5563; }
 .doc-position { margin: 0 0 .3rem; font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); }
 .doc-initials {
@@ -671,7 +672,7 @@ html.header-hidden .chip-nav { top: 0; }
 .offer-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .offer-body { padding: clamp(1.4rem, 4vw, 2.6rem); align-self: center; }
 .offer-body h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin: .8rem 0 .4rem; }
-.offer-note { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--rose); }
+.offer-note { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--rose-text); }
 .offer-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
 
 /* ---------- Tag pills ---------- */
@@ -759,7 +760,7 @@ html.header-hidden .chip-nav { top: 0; }
   }
   .site-nav ul a::after { display: none; }
   .site-nav ul a::before { content: '→'; order: 2; color: var(--rose); font-family: var(--sans); font-size: 1.1rem; }
-  .site-nav ul a[aria-current] { color: var(--rose); }
+  .site-nav ul a[aria-current] { color: var(--rose-text); }
   .site-nav .btn { width: 100%; min-height: 54px; font-size: 1rem; }
   .site-nav li, .site-nav > .btn, .nav-extra { opacity: 0; transform: translateY(10px); transition: opacity .4s var(--ease), transform .4s var(--ease); }
   .site-nav.is-open li, .site-nav.is-open > .btn, .site-nav.is-open .nav-extra { opacity: 1; transform: none; }

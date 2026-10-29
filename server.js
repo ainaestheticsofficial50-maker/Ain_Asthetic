@@ -131,6 +131,12 @@ app.post('/contact', async (req, res, next) => {
   }
 });
 
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send(`User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
+});
+
+app.get('/favicon.ico', (req, res) => res.redirect(301, '/img/favicon.png'));
+
 app.get('/sitemap.xml', (req, res) => {
   const urls = [...Object.keys(pages), ...site.treatments.map((t) => `/treatments/${t.slug}`)]
     .map((p) => `<url><loc>${site.url}${p === '/' ? '' : p}</loc></url>`)
