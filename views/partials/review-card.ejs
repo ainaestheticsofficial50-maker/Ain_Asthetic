@@ -1,8 +1,12 @@
 <figure class="review-card reveal">
-  <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+  <div class="stars" aria-label="<%= r.stars || 5 %> out of 5 stars"><%= '★'.repeat(r.stars || 5) %></div>
   <blockquote>“<%= r.quote %>”</blockquote>
   <figcaption>
-    <img src="/img/<%= r.photo %>" alt="" loading="lazy" width="48" height="48">
-    <span><strong><%= r.name %></strong><span>Verified client</span></span>
+    <% if (r.photo) { %>
+      <img src="/img/<%= r.photo %>" alt="" loading="lazy" width="48" height="48">
+    <% } else { %>
+      <span class="review-initial" aria-hidden="true"><%= r.name.trim()[0] %></span>
+    <% } %>
+    <span><strong><%= r.name %></strong><span><%= [r.treatment, r.source || 'Verified client'].filter(Boolean).join(' · ') %></span></span>
   </figcaption>
 </figure>

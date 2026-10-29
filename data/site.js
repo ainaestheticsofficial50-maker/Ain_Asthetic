@@ -297,6 +297,8 @@ module.exports = {
   ],
 
   // ---------------------------------------------------------------- Reviews
+  // Only real reviews from real clients. `photo`, `treatment`, `source` (e.g. 'Google review',
+  // default 'Verified client') and `stars` (default 5) are optional; no photo shows an initial.
   reviews: [
     { quote: 'The staff is very cooperative and professional. My experience at Aesthetics & Medical Center was excellent. I am really happy with the results and highly recommend this place!', name: 'Happy Client', photo: 'reviews/woman.jpg' },
     { quote: 'Amazing experience at Aesthetics & Medical Center! The staff is professional, friendly and very cooperative. Highly recommended for anyone looking for quality aesthetic treatments and excellent care.', name: 'Happy Client', photo: 'reviews/man.jpg' },

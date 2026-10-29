@@ -59,10 +59,9 @@
 <nav class="action-bar" aria-label="Quick contact">
   <a href="tel:<%= site.phones[0].replace(/-/g, '') %>">
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
-    Call
+    Call Now
   </a>
-  <a class="ab-wa" href="<%= site.waLink('Hi, I would like to book an appointment.') %>" target="_blank" rel="noopener"><%- include('whatsapp-icon', { size: 18 }) %> WhatsApp</a>
-  <a class="ab-book" href="/contact">Book Now</a>
+  <a class="ab-wa" href="<%= site.waLink('Hi, I would like to book an appointment.') %>" target="_blank" rel="noopener"><%- include('whatsapp-icon', { size: 18 }) %> Contact on WhatsApp</a>
 </nav>
 
 <script src="/js/main.js?v=<%= v %>" defer></script>
