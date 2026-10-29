@@ -1,31 +1,36 @@
 <%- include('partials/head') %>
-<% const lead = site.leadDoctor; %>
+<% const founder = site.founder; const pictured = site.doctors.filter(d => d.photo); %>
 
 <section class="hero">
+  <div class="hero-media">
+    <div class="hero-photo">
+      <img src="/img/clinic-lounge.jpg" alt="The patient lounge at <%= site.name %>, <%= site.address.short %>" width="960" height="1000" fetchpriority="high">
+    </div>
+    <p class="hero-caption">Our clinic, <%= site.address.short %></p>
+    <a class="hero-team" href="/doctors">
+      <span class="hero-team-faces">
+        <% pictured.slice(0, 3).forEach(d => { %><img src="/img/<%= d.photo %>" alt="" width="44" height="44"><% }) %>
+      </span>
+      <span>
+        <strong><%= site.doctors.length %> doctors</strong>
+        <span>Dermatology &amp; aesthetics</span>
+      </span>
+    </a>
+  </div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow"><%= site.tagline %></p>
+      <p class="eyebrow">Welcome to <%= site.shortName %></p>
       <h1>Expert skin, hair &amp; laser care, <span class="accent">led by doctors</span></h1>
-      <p class="lead">Dermatologists and aesthetic physicians at <%= site.name %>, <%= site.address.short %>. Honest advice, safe treatments, real results.</p>
+      <p class="lead">Founded by <%= founder.name %>, <%= site.name %> brings dermatologists and aesthetic physicians together in <%= site.address.short %>. Honest advice, safe treatments, real results.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/contact">Book Appointment</a>
         <a class="btn btn-ghost" href="/treatments">Explore treatments</a>
       </div>
       <ul class="hero-stats">
-        <li><strong><%= Math.max(...site.doctors.map(d => d.experience)) %> yrs</strong><span>Senior dermatologist experience</span></li>
-        <li><strong><%= site.doctors.length %> doctors</strong><span>Dermatology &amp; aesthetics</span></li>
+        <li><strong><%= Math.max(...site.doctors.filter(d => d.experience).map(d => d.experience)) %> yrs</strong><span>Senior dermatologist experience</span></li>
         <li><strong><%= site.treatments.length %>+</strong><span>Skin, hair &amp; laser treatments</span></li>
+        <li><strong>CPD</strong><span>Verified training academy</span></li>
       </ul>
-    </div>
-    <div class="hero-media">
-      <div class="hero-arch">
-        <img src="/img/dr-asim-hero.jpg" alt="<%= lead.name %> at Ain Aesthetics" width="560" height="1030" fetchpriority="high">
-      </div>
-      <div class="hero-badge">
-        <p class="script">Meet</p>
-        <p class="hero-badge-name"><%= lead.name %></p>
-        <p class="hero-badge-role"><%= lead.role %></p>
-      </div>
     </div>
   </div>
 </section>
@@ -124,6 +129,23 @@
 </section>
 
 <section class="section">
+  <div class="container split split-reverse">
+    <div class="split-media reveal">
+      <img src="/img/<%= site.academy.photo %>" alt="Trainers at the <%= site.academy.title %>" loading="lazy">
+    </div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">CPD verified</p>
+      <h2><%= site.academy.title %></h2>
+      <p><%= site.academy.tagline %> Four levels take you from foundation knowledge to master-level aesthetics, under dermatologist supervision.</p>
+      <ol class="level-pills">
+        <% site.academy.levels.forEach(l => { %><li>Level <%= l.level %></li><% }) %>
+      </ol>
+      <a class="btn btn-primary" href="/academy">Explore the academy</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint">
   <div class="container">
     <header class="section-head">
       <p class="eyebrow">Client reviews</p>

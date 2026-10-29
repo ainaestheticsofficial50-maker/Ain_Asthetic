@@ -1,16 +1,30 @@
 <article class="doc-card reveal" id="<%= d.slug %>">
   <div class="doc-photo">
-    <img src="/img/<%= d.photo %>" alt="<%= d.name %>" loading="lazy">
-    <span class="doc-exp"><strong><%= d.experience %></strong> years<br>experience</span>
+    <% if (d.photo) { %>
+      <img src="/img/<%= d.photo %>" alt="<%= d.name %>" loading="lazy">
+    <% } else { %>
+      <span class="doc-initials" aria-hidden="true"><%= d.name.replace(/^Dr\.?\s*/, '').split(/\s+/).slice(0, 2).map(w => w[0]).join('') %></span>
+    <% } %>
+    <% if (d.experience) { %>
+      <span class="doc-exp"><strong><%= d.experience %></strong> years<br>experience</span>
+    <% } %>
   </div>
   <div class="doc-body">
+    <% if (d.position) { %><p class="doc-position"><%= d.position %></p><% } %>
     <h3><%= d.name %></h3>
     <p class="doc-role"><%= d.role %></p>
     <% if (locals.full) { %>
       <p><%= d.bio %></p>
-      <ul class="tag-list">
-        <% d.focus.forEach(f => { %><li><%= f %></li><% }) %>
-      </ul>
+      <% if (d.credentials) { %>
+        <ul class="doc-creds">
+          <% d.credentials.forEach(c => { %><li><%= c %></li><% }) %>
+        </ul>
+      <% } %>
+      <% if (d.focus) { %>
+        <ul class="tag-list">
+          <% d.focus.forEach(f => { %><li><%= f %></li><% }) %>
+        </ul>
+      <% } %>
     <% } %>
   </div>
 </article>

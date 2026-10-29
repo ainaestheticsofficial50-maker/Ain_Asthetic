@@ -1,0 +1,81 @@
+<%- include('partials/head') %>
+<% const a = site.academy; const enquiry = site.waLink(`Hi, I would like to know more about the ${a.title}.`); %>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">CPD verified · Fast Track</p>
+    <h1><%= a.title %></h1>
+    <p class="lead"><%= a.tagline %> Train at <%= site.name %> under dermatologist supervision.</p>
+    <div class="hero-actions academy-actions">
+      <a class="btn btn-whatsapp" href="<%= enquiry %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 20 }) %> Ask about training</a>
+      <a class="btn btn-ghost" href="#levels">See the four levels</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="levels">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Your qualification route</p>
+      <h2>Four levels, foundation to master</h2>
+      <p>Start at the level that matches your background and progress at your own pace.</p>
+    </header>
+    <div class="level-grid stagger">
+      <% a.levels.forEach(l => { %>
+        <article class="level-card reveal">
+          <h3><span>Level</span> <%= l.level %></h3>
+          <ul>
+            <% l.items.forEach(item => { %><li><%= item %></li><% }) %>
+          </ul>
+          <% if (l.for) { %>
+            <p class="level-for"><strong>Recommended for</strong> <%= l.for %></p>
+          <% } %>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="container split">
+    <div class="split-media reveal">
+      <img src="/img/<%= a.photo %>" alt="Trainers at the <%= a.title %>" loading="lazy">
+    </div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">Industry experience matters</p>
+      <h2>The Ain route to Level 4</h2>
+      <ul class="checklist">
+        <% a.route.forEach(r => { %>
+          <li><%- include('partials/icon', { name: 'check', size: 20 }) %> <span><%= r %></span></li>
+        <% }) %>
+      </ul>
+      <div class="direct-entry">
+        <p><strong>Direct entry.</strong> <%= a.directEntry %></p>
+        <ul class="tag-list">
+          <% a.directEntryTopics.forEach(t => { %><li><%= t %></li><% }) %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split split-reverse">
+    <div class="split-media reveal" data-gallery>
+      <a class="poster" href="/img/<%= a.poster %>" data-lightbox>
+        <img src="/img/<%= a.poster %>" alt="<%= a.title %> Fast Track poster" loading="lazy">
+      </a>
+    </div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">Enrol</p>
+      <h2>Not sure which level is right for you?</h2>
+      <p>Message us with your qualifications and experience and we’ll recommend where to start.</p>
+      <div class="hero-actions">
+        <a class="btn btn-whatsapp" href="<%= enquiry %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 20 }) %> Chat on WhatsApp</a>
+        <a class="btn btn-ghost" href="tel:<%= site.phones[0].replace(/-/g, '') %>">Call <%= site.phones[0] %></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -22,35 +22,72 @@ module.exports = {
   },
 
   // ---------------------------------------------------------------- Doctors
-  // `lead` is featured on the home page.
+  // The doctor whose `position` starts with "Founder" is named in the home hero.
+  // `position`, `experience`, `photo`, `credentials` and `focus` are optional;
+  // doctors without a photo show initials.
   doctors: [
+    {
+      slug: 'dr-ghulam-sughra',
+      name: 'Dr. Ghulam Sughra',
+      position: 'Founder & Chairperson',
+      role: 'Dermatologist & Aesthetic Physician',
+      photo: 'doctors/ghulam-sughra.jpg',
+      credentials: [
+        'MBBS, RMP',
+        'MRCP (UK – London), MRCP (UK – Edinburgh)',
+        'FCPS (Pakistan), MS (Dermatology)',
+        'CHPE (Karachi, Pakistan)',
+        'Certified in Aesthetic Medicine & Cosmetology',
+        'Certified CFRC & ICC Provider',
+      ],
+      focus: ['Dermatology', 'Aesthetic medicine', 'Cosmetology'],
+      bio: 'Dr. Ghulam Sughra founded Ain Aesthetics. A dermatologist with qualifications from Pakistan and the UK, she is certified in aesthetic medicine and cosmetology and oversees the standard of care across the clinic.',
+    },
     {
       slug: 'dr-asim-farooq-virk',
       name: 'Dr. Asim Farooq Virk',
+      position: 'Co-Chairman',
       role: 'Aesthetic Physician',
       experience: 7,
       photo: 'doctors/asim.jpg',
-      lead: true,
+      credentials: [
+        'MBBS (Kyrgyzstan), Physical Medicine (Pakistan), MPH (Pakistan)',
+        'Diploma in Aesthetics (UK)',
+        'Ventusa Therapist (London)',
+        'Senior Aesthetics Practical Demonstrator, LIST University',
+        'CPD Trainer for Aesthetics Protocol',
+      ],
       focus: ['Skin rejuvenation', 'Acne scars', 'Hair restoration', 'Microneedling'],
       bio: 'Dr. Asim leads treatment planning at Ain Aesthetics, from first consultation to follow-up. His approach: understand your concern properly, recommend only what you need, and deliver natural-looking results.',
     },
     {
       slug: 'dr-sadaf-khan',
       name: 'Dr. Sadaf Khan',
-      role: 'Consultant Dermatologist',
-      experience: 25,
+      role: 'Dermatologist',
+      experience: 13,
       photo: 'doctors/sadaf-khan.jpg',
+      credentials: ['MBBS, MCPS'],
       focus: ['Skin health', 'Anti-ageing care', 'Hair solutions', 'Aesthetic treatments'],
-      bio: 'A consultant dermatologist with 25 years of experience, Dr. Sadaf Khan brings deep clinical expertise to every skin and hair concern.',
+      bio: 'A dermatologist with 13 years of experience in skin and hair, Dr. Sadaf Khan brings deep clinical expertise to every concern.',
     },
     {
-      slug: 'dr-ghulam-sughra',
-      name: 'Dr. Ghulam Sughra',
-      role: 'Aesthetics & Dermatology',
-      experience: 13,
-      photo: 'doctors/ghulam-sughra.jpg',
-      focus: ['Dermatology', 'Aesthetic treatments', 'Skin concerns'],
-      bio: 'With 13 years of experience in aesthetics and dermatology, Dr. Ghulam Sughra provides careful, personalised care for skin concerns.',
+      slug: 'dr-aneela-iqbal',
+      name: 'Dr. Aneela Iqbal',
+      role: 'Clinical Dermatologist',
+      experience: 5,
+      credentials: [
+        'MBBS, FCPS',
+        'Former Registrar, Shalimar Medical & Dental College',
+        'CPD Trainer',
+      ],
+      bio: 'A clinical dermatologist with 5 years of experience, Dr. Aneela Iqbal previously served as a Registrar at Shalimar Medical & Dental College and is a CPD trainer.',
+    },
+    {
+      slug: 'dr-hamid-elahi-dar',
+      name: 'Dr. Hamid Elahi Dar',
+      role: 'Aesthetic Physician',
+      credentials: ['MBBS, RMP', 'BLS, ALS', 'Diploma in Aesthetics (AAA)'],
+      bio: 'An aesthetic physician with a Diploma in Aesthetics (AAA), Dr. Hamid Elahi Dar is certified in Basic and Advanced Life Support.',
     },
   ],
 
@@ -123,6 +160,7 @@ module.exports = {
       benefits: ['Softens fine lines', 'Smooths forehead & frown lines', 'Natural-looking results'],
       bestFor: ['Forehead lines', 'Frown lines', 'Early signs of ageing'],
       poster: 'treatments/botox.jpg',
+      results: ['botox'],
     },
     {
       slug: 'botox-rf-microneedling',
@@ -186,6 +224,39 @@ module.exports = {
     },
   ],
 
+  // -------------------------------------------------------- Training academy
+  // From the clinic's "Aesthetics Training Academy: Fast Track" poster.
+  academy: {
+    title: 'Aesthetics Training Academy',
+    tagline: 'Find the right qualification route for your career in aesthetics.',
+    poster: 'posters/training-academy.jpg',
+    photo: 'academy-trainers.jpg',
+    levels: [
+      {
+        level: 1,
+        items: ['Pathway to aesthetics: foundation knowledge for beginners entering the beauty aesthetics industry', 'Anatomy & physiology', 'Health safety (PHC)', 'Client care', 'Ethics protocol', 'Aesthetics practice in the Middle East'],
+      },
+      {
+        level: 2,
+        items: ['Skin qualification', 'Introduction to facials', 'Skin analysis', 'Treatment planning', 'Non-invasive treatment', 'Clinical communication skills', 'Advanced skin rejuvenation'],
+        for: 'AHS, BS Aesthetics and Cosmetology',
+      },
+      {
+        level: 3,
+        items: ['Advanced aesthetics', 'Mesotherapy', 'RF microneedling', 'Face exosomes', 'IV therapy', 'PRP / PRGF', 'Semi-permanent makeup'],
+        for: 'Aestheticians and non-core specialists with 2 years’ experience in the medical industry',
+      },
+      {
+        level: 4,
+        items: ['Complication management', 'Safety protocol', 'Patient assessment', 'Evidence-based practice', 'Advanced injectables', 'Master-level aesthetics'],
+        for: 'MBBS, MCPS, D-Derm, FCPS, MRCP',
+      },
+    ],
+    directEntry: 'With 8+ years of experience and relevant qualifications, you can enter directly at Level 4.',
+    directEntryTopics: ['Middle East ethical practice', 'Complication handling strategies'],
+    route: ['Top-notch dermatologist supervision', 'Career progression support', 'Accredited CPD programme', 'Programme guidance available'],
+  },
+
   // ----------------------------------------------------------------- Offers
   // Set `active: false` when an offer ends; it disappears from every page.
   offers: [
@@ -197,6 +268,7 @@ module.exports = {
   // ---------------------------------------------------------------- Results
   results: [
     { id: 'acne2', title: 'Acne Scars', before: 'acne2-before.jpg', after: 'acne2-after.jpg', note: 'Clearer, smoother & healthier-looking skin', treatment: 'acne-scar-treatment' },
+    { id: 'botox', title: 'Botox: Forehead Lines', before: 'botox-before.jpg', after: 'botox-after.jpg', note: 'Smoother forehead, natural expression', treatment: 'botox' },
     { id: 'back', title: 'Laser Hair Removal: Back', before: 'back-before.jpg', after: 'back-after.jpg', note: 'Smooth skin, longer-lasting results', treatment: 'laser-hair-removal' },
     { id: 'melasma', title: 'Melasma Treatment', before: 'melasma-before.jpg', after: 'melasma-after.jpg', note: 'Clearer, brighter, healthier skin', treatment: 'melasma-pigmentation' },
     { id: 'acne', title: 'Acne Scar Treatment', before: 'acne-before.jpg', after: 'acne-after.jpg', note: 'Smoother texture, reduced scarring', treatment: 'acne-scar-treatment' },
@@ -242,5 +314,5 @@ m.offerById = Object.fromEntries(m.activeOffers.map((o) => [o.id, o]));
 m.treatmentBySlug = Object.fromEntries(m.treatments.map((t) => [t.slug, t]));
 m.resultById = Object.fromEntries(m.results.map((r) => [r.id, r]));
 m.categoryBySlug = Object.fromEntries(m.categories.map((c) => [c.slug, c]));
-m.leadDoctor = m.doctors.find((d) => d.lead) || m.doctors[0];
+m.founder = m.doctors.find((d) => /^Founder/.test(d.position || '')) || m.doctors[0];
 m.waLink = (text) => `https://wa.me/${m.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;

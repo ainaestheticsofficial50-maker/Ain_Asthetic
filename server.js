@@ -46,8 +46,9 @@ const pages = {
   '/': { view: 'index', title: 'Skin, Hair & Laser Clinic in DHA Lahore' },
   '/treatments': { view: 'treatments', title: 'Treatments', description: 'HydraFacial, carbon laser, BioRePeel, Botox, RF microneedling, exosomes, hair PRP and laser hair removal in DHA Lahore.' },
   '/doctors': { view: 'doctors', title: 'Our Doctors', description: 'Meet the dermatologists and aesthetic physicians at Ain Aesthetics & Medical Center, Lahore.' },
-  '/results': { view: 'results', title: 'Before & After Results', description: 'Real before and after results for acne scars, melasma and laser hair removal.' },
+  '/results': { view: 'results', title: 'Before & After Results', description: 'Real before and after results for acne scars, melasma, Botox and laser hair removal.' },
   '/offers': { view: 'offers', title: 'Current Offers', description: 'Limited-time offers on hair exosomes, PRP and Botox + RF microneedling.' },
+  '/academy': { view: 'academy', title: 'Aesthetics Training Academy', description: 'CPD-verified aesthetics training in DHA Lahore: four levels from foundation knowledge to advanced injectables and complication management.', ogImage: 'posters/training-academy.jpg' },
   '/contact': { view: 'contact', title: 'Book an Appointment' },
 };
 

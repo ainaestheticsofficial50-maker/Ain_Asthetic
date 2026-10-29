@@ -61,6 +61,7 @@ const crops = [
   }
   await officialLogo();
   await batch2();
+  await batch3();
   console.log('Assets ready.');
 })();
 
@@ -158,6 +159,27 @@ async function batch2() {
   }
   for (const [out, name, box] of b2Crops) {
     await sharp(path.join(B2, name)).extract(box).resize({ width: 800, withoutEnlargement: true })
+      .jpeg({ quality: 84, mozjpeg: true }).toFile(path.join(OUT, out));
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Batch 3 (Images/batch3): clinic interior, training academy, Botox result.
+const B3 = path.join(SRC, 'batch3');
+const b3Crops = [
+  // [output, source, crop box or null for the whole image, output width]
+  ['img/clinic-lounge.jpg', 'clinic-lounge.jpg', { left: 0, top: 180, width: 960, height: 1000 }, 960],
+  ['img/posters/training-academy.jpg', 'training-academy.jpg', null, 963],
+  ['img/academy-trainers.jpg', 'training-academy.jpg', { left: 500, top: 100, width: 463, height: 360 }, 463],
+  ['img/results/botox-before.jpg', 'result-botox-forehead.jpg', { left: 110, top: 100, width: 560, height: 490 }, 560],
+  ['img/results/botox-after.jpg', 'result-botox-forehead.jpg', { left: 110, top: 725, width: 560, height: 500 }, 560],
+];
+
+async function batch3() {
+  for (const [out, name, box, width] of b3Crops) {
+    let img = sharp(path.join(B3, name));
+    if (box) img = img.extract(box);
+    await img.resize({ width, withoutEnlargement: true })
       .jpeg({ quality: 84, mozjpeg: true }).toFile(path.join(OUT, out));
   }
 }

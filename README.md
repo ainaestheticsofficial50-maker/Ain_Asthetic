@@ -29,12 +29,13 @@ Templates are in `views/` (shared header/footer in `views/partials/`), styles in
 
 | URL | Purpose |
 | --- | --- |
-| `/` | Home: offers, treatment finder, results, doctors, reviews, videos |
+| `/` | Home: clinic photo hero, offers, treatment finder, results, doctors, academy, reviews, videos |
 | `/treatments` | All treatments grouped by concern |
 | `/treatments/:slug` | One treatment: benefits, best for, results, booking |
 | `/doctors` | Team and how we work |
 | `/results` | Filterable before/after sliders and result posters |
 | `/offers` | Current promotions |
+| `/academy` | Aesthetics Training Academy: four CPD levels and enquiry |
 | `/contact` | Booking form, phone, WhatsApp, map |
 
 ## Images
