@@ -18,7 +18,7 @@
       <p class="lead"><%= t.summary %></p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="<%= bookHref %>">Book <%= t.title %></a>
-        <a class="btn btn-ghost" href="<%= site.waLink(`Hi, I'd like to book ${t.title}. Could you share the details?`) %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 18 }) %> Ask on WhatsApp</a>
+        <a class="btn btn-ghost" href="<%= site.waLink(waText) %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 18 }) %> Ask on WhatsApp</a>
       </div>
 
       <div class="t-facts">

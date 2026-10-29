@@ -10,7 +10,7 @@
     <p class="offer-note">Limited-time offer</p>
     <div class="offer-actions">
       <a class="btn btn-primary btn-sm" href="/contact?service=<%= encodeURIComponent(t ? t.title : '') %>">Book this offer</a>
-      <a class="btn btn-ghost btn-sm" href="<%= site.waLink(`Hi, I'd like to know more about the ${o.title} offer (${o.badge}).`) %>" target="_blank" rel="noopener">Ask on WhatsApp</a>
+      <a class="btn btn-ghost btn-sm" href="<%= site.waLink(site.waOffer(o)) %>" target="_blank" rel="noopener">Ask on WhatsApp</a>
     </div>
   </div>
 </article>

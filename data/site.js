@@ -318,3 +318,7 @@ m.resultById = Object.fromEntries(m.results.map((r) => [r.id, r]));
 m.categoryBySlug = Object.fromEntries(m.categories.map((c) => [c.slug, c]));
 m.founder = m.doctors.find((d) => /^Founder/.test(d.position || '')) || m.doctors[0];
 m.waLink = (text) => `https://wa.me/${m.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+// Pre-filled WhatsApp messages name the treatment or deal the visitor was looking at.
+m.waDefault = 'Hi, I would like to book an appointment.';
+m.waAbout = (subject) => `Hi, I need info about ${subject}. Could you share the details?`;
+m.waOffer = (o) => m.waAbout(`the ${o.title} offer (${o.badge})`);

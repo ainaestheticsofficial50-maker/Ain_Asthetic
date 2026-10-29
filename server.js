@@ -54,11 +54,11 @@ app.use((req, res, next) => {
 
 const pages = {
   '/': { view: 'index', title: 'Skin, Hair & Laser Clinic in DHA Lahore' },
-  '/treatments': { view: 'treatments', title: 'Treatments', description: 'HydraFacial, carbon laser, BioRePeel, Botox, RF microneedling, exosomes, hair PRP and laser hair removal in DHA Lahore.' },
-  '/doctors': { view: 'doctors', title: 'Our Doctors', description: 'Meet the dermatologists and aesthetic physicians at Ain Aesthetics & Medical Center, Lahore.' },
-  '/results': { view: 'results', title: 'Before & After Results', description: 'Real before and after results for acne scars, melasma, Botox and laser hair removal.' },
-  '/offers': { view: 'offers', title: 'Current Offers', description: 'Limited-time offers on hair exosomes, PRP and Botox + RF microneedling.' },
-  '/academy': { view: 'academy', title: 'Aesthetics Training Academy', description: 'CPD-verified aesthetics training in DHA Lahore: four levels from foundation knowledge to advanced injectables and complication management.', ogImage: 'posters/training-academy.jpg' },
+  '/treatments': { view: 'treatments', waText: 'Hi, I need advice on which treatment is right for me.', title: 'Treatments', description: 'HydraFacial, carbon laser, BioRePeel, Botox, RF microneedling, exosomes, hair PRP and laser hair removal in DHA Lahore.' },
+  '/doctors': { view: 'doctors', waText: 'Hi, I would like to book a consultation with one of your doctors.', title: 'Our Doctors', description: 'Meet the dermatologists and aesthetic physicians at Ain Aesthetics & Medical Center, Lahore.' },
+  '/results': { view: 'results', waText: 'Hi, I saw your before & after results. Could you tell me which treatment would suit me?', title: 'Before & After Results', description: 'Real before and after results for acne scars, melasma, Botox and laser hair removal.' },
+  '/offers': { view: 'offers', waText: site.waAbout('your current offers'), title: 'Current Offers', description: 'Limited-time offers on hair exosomes, PRP and Botox + RF microneedling.' },
+  '/academy': { view: 'academy', waText: site.waAbout(`the ${site.academy.title}`), title: 'Aesthetics Training Academy', description: 'CPD-verified aesthetics training in DHA Lahore: four levels from foundation knowledge to advanced injectables and complication management.', ogImage: 'posters/training-academy.jpg' },
   '/contact': { view: 'contact', title: 'Book an Appointment' },
 };
 
@@ -71,13 +71,15 @@ for (const [route, page] of Object.entries(pages)) {
 app.get('/treatments/:slug', (req, res, next) => {
   const treatment = site.treatmentBySlug[req.params.slug];
   if (!treatment) return next();
+  const offer = site.offerById[treatment.offer];
   res.render('treatment', {
+    waText: offer ? site.waOffer(offer) : site.waAbout(treatment.title),
     title: `${treatment.title} in DHA Lahore`,
     description: treatment.summary,
     ogImage: treatment.poster,
     treatment,
     category: site.categoryBySlug[treatment.category],
-    offer: site.offerById[treatment.offer],
+    offer,
     results: (treatment.results || []).map((id) => site.resultById[id]).filter(Boolean),
     compare: site.treatmentBySlug[treatment.compare],
     related: site.treatments.filter((t) => t.category === treatment.category && t.slug !== treatment.slug),

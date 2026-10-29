@@ -77,7 +77,7 @@
         <% site.phones.forEach(p => { %>
           <a class="big-phone" href="tel:<%= p.replace(/-/g, '') %>"><%= p %></a>
         <% }) %>
-        <a class="btn btn-whatsapp" href="<%= site.waLink('Hi, I would like to book an appointment.') %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 20 }) %> Chat on WhatsApp</a>
+        <a class="btn btn-whatsapp" href="<%= site.waLink(site.waDefault) %>" target="_blank" rel="noopener"><%- include('partials/whatsapp-icon', { size: 20 }) %> Chat on WhatsApp</a>
       </div>
       <div class="info-block">
         <h2>Our location</h2>
