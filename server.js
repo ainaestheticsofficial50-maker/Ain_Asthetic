@@ -6,9 +6,10 @@ const compression = require('compression');
 const site = require('./data/site');
 
 const app = express();
-const isProd = process.env.NODE_ENV === 'production';
-// Appended to CSS/JS URLs so browsers fetch fresh files after every restart/deploy.
-const assetVersion = Date.now().toString(36);
+const isProd = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);
+// Appended to CSS/JS URLs so browsers fetch fresh files after every deploy. On Vercel the
+// commit SHA keeps it stable across serverless cold starts, so cached files stay valid.
+const assetVersion = (process.env.VERCEL_GIT_COMMIT_SHA || Date.now().toString(36)).slice(0, 12);
 const PORT = process.env.PORT || 3000;
 const APPOINTMENTS_FILE = path.join(__dirname, 'data', 'appointments.json');
 
@@ -33,6 +34,15 @@ app.use(
 app.use(compression());
 app.use(express.urlencoded({ extended: false, limit: '10kb' }));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: isProd ? '30d' : 0 }));
+
+// Pages only change on deploy, so let Vercel's CDN serve them for a day (a new deploy
+// starts with an empty cache). Requests with a query string, e.g. form status, skip it.
+app.use((req, res, next) => {
+  if (isProd && req.method === 'GET' && !req.url.includes('?')) {
+    res.set('Cache-Control', 'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800');
+  }
+  next();
+});
 
 app.use((req, res, next) => {
   res.locals.site = site;
@@ -132,7 +142,7 @@ app.use((req, res) => res.status(404).render('404', { title: 'Page not found' })
 
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).render('404', { title: 'Something went wrong', error: true });
+  res.set('Cache-Control', 'no-store').status(500).render('404', { title: 'Something went wrong', error: true });
 });
 
 app.listen(PORT, () => console.log(`Ain Aesthetics running at http://localhost:${PORT}`));

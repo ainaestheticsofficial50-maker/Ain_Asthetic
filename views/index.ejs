@@ -2,24 +2,9 @@
 <% const founder = site.founder; const pictured = site.doctors.filter(d => d.photo); %>
 
 <section class="hero">
-  <div class="hero-media">
-    <div class="hero-photo">
-      <img src="/img/clinic-lounge.jpg" alt="The patient lounge at <%= site.name %>, <%= site.address.short %>" width="960" height="1000" fetchpriority="high">
-    </div>
-    <p class="hero-caption">Our clinic, <%= site.address.short %></p>
-    <a class="hero-team" href="/doctors">
-      <span class="hero-team-faces">
-        <% pictured.slice(0, 3).forEach(d => { %><img src="/img/<%= d.photo %>" alt="" width="44" height="44"><% }) %>
-      </span>
-      <span>
-        <strong><%= site.doctors.length %> doctors</strong>
-        <span>Dermatology &amp; aesthetics</span>
-      </span>
-    </a>
-  </div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">Welcome to <%= site.shortName %></p>
+      <p class="eyebrow hero-eyebrow">Welcome to <%= site.shortName %></p>
       <h1>Expert skin, hair &amp; laser care, <span class="accent">led by doctors</span></h1>
       <p class="lead">Founded by <%= founder.name %>, <%= site.name %> brings dermatologists and aesthetic physicians together in <%= site.address.short %>. Honest advice, safe treatments, real results.</p>
       <div class="hero-actions">
@@ -31,6 +16,28 @@
         <li><strong><%= site.treatments.length %>+</strong><span>Skin, hair &amp; laser treatments</span></li>
         <li><strong>CPD</strong><span>Verified training academy</span></li>
       </ul>
+    </div>
+    <div class="hero-media">
+      <div class="hero-frame">
+        <img src="/img/clinic-lounge.jpg" alt="The patient lounge at <%= site.name %>, <%= site.address.short %>" width="960" height="1000" fetchpriority="high">
+        <p class="hero-caption">Our clinic · <%= site.address.short %></p>
+      </div>
+      <div class="hero-seal" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><path id="seal-ring" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+          <text><textPath href="#seal-ring" textLength="272"><%= site.tagline.toUpperCase() %> · <%= site.shortName.toUpperCase() %> ·</textPath></text>
+        </svg>
+        <img src="/img/logo-mark-light.png" alt="" width="44" height="29">
+      </div>
+      <a class="hero-team" href="/doctors">
+        <span class="hero-team-faces">
+          <% pictured.slice(0, 3).forEach(d => { %><img src="/img/<%= d.photo %>" alt="" width="40" height="40"><% }) %>
+        </span>
+        <span>
+          <strong>Meet our <%= site.doctors.length %> doctors</strong>
+          <span>Dermatology &amp; aesthetics</span>
+        </span>
+      </a>
     </div>
   </div>
 </section>
@@ -167,7 +174,7 @@
     </header>
     <div class="video-grid snap-row stagger" data-snap>
       <% site.videos.forEach(file => { %>
-        <video class="reveal" src="/video/<%= file %>" autoplay muted loop playsinline preload="metadata" data-autoplay></video>
+        <video class="reveal" src="/video/<%= file %>#t=0.1" muted loop playsinline preload="none" data-autoplay></video>
       <% }) %>
     </div>
   </div>
